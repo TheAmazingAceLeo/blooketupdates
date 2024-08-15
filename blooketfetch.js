@@ -31,7 +31,7 @@ console.log(date.toString());
 console.log(date.getUTCHours() + ":" + date.getUTCMinutes())
 async function getScript() {
     for (let file of files) {
-        await getText("https://" + file, file + ".html")
+        await getText("https://" + file, "html/" + file + ".html")
     };
     fs.appendFileSync("jsFiles.txt", "\n" + date.toString());
     files.forEach(file => {

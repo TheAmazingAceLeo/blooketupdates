@@ -4,9 +4,10 @@ const {
 import("node-fetch");
 const fs = require('fs');
 const path = require("path");
-const {
-    text
-} = require('express');
+
+function formatDate(date) {
+    return date.toISOString().replace(/[:.]/g, '-');
+}
 async function getText(webfile, outfile) {
     let gethtml = await fetch(webfile);
     let html = await gethtml.text();
@@ -27,15 +28,16 @@ const files = [
     "goldquest.blooket.com"
 ]
 let date = new Date;
+let formatteddate = formatDate(date);
 console.log(date.toString());
 console.log(date.getUTCHours() + ":" + date.getUTCMinutes())
 async function getScript() {
     for (let file of files) {
         await getText("https://" + file, "html/" + file + ".html")
     };
-    fs.appendFileSync("jsFiles.txt", "\n" + date.toString());
+    fs.appendFileSync("jsFiles.txt", "\n" + formatteddate);
     files.forEach(file => {
-        fs.readFile(file + ".html", (err, data) => {
+        fs.readFile("html/" + file + ".html", (err, data) => {
             if (err) throw err;
             let blookethtml = parse(data);
             let scripttags = blookethtml.getElementsByTagName("script");
@@ -45,19 +47,19 @@ async function getScript() {
                 let srcfile = src.replace("https://ac.blooket.com/", "");
                 srcfile = srcfile.replace("/assets", "");
                 srcfiles.push(srcfile)
-                getText(src, srcfile + "_" + date.toDateString());
+                getText(src, srcfile + formatteddate);
                 getText(src, "last_" + srcfile);
                 if (!fs.existsSync("srcs.txt")) {
                     fs.writeFileSync("srcs.txt", "");
                 };
-                let srcs = fs.readFileSync("srcs.txt", text).toString()
-                if (srcfile != srcs) {
+                let srcs = fs.readFileSync("srcs.txt", "utf8").toString()
+                if (!srcs.includes(srcfile)) {
                     console.log(script.toString());
                 };
                 fs.appendFileSync("jsFiles.txt", "\n" + script.toString());
             });
             if (srcfiles.length > 3) {
-                fs.writeFileSync("srcs.txt", text)
+                fs.writeFileSync("srcs.txt", );
             };
         });
     })

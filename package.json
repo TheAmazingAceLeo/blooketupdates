@@ -1,0 +1,25 @@
+{
+  "name": "blooketupdates",
+  "version": "1.0.0",
+  "description": "blooket update thingy",
+  "main": "blooketfetch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheAmazingAceLeo/blooketupdates.git"
+  },
+  "author": "TheAmazingAceLeo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheAmazingAceLeo/blooketupdates/issues"
+  },
+  "homepage": "https://github.com/TheAmazingAceLeo/blooketupdates#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.3.2",
+    "node-html-parser": "^6.1.13",
+    "path": "^0.12.7"
+  }
+}

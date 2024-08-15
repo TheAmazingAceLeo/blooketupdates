@@ -47,8 +47,8 @@ async function getScript() {
                 let srcfile = src.replace("https://ac.blooket.com/", "");
                 srcfile = srcfile.replace("/assets", "");
                 srcfiles.push(srcfile)
-                getText(src, "assets/" + formatteddate + srcfile);
-                getText(src, "last_" + srcfile);
+                getText(src, "assets/" + formatteddate + "/" + srcfile);
+                getText(src, "last/" + srcfile);
                 if (!fs.existsSync("srcs.txt")) {
                     fs.writeFileSync("srcs.txt", "");
                 };

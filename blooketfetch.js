@@ -3,7 +3,10 @@ const {
 } = require('node-html-parser');
 import("node-fetch");
 const fs = require('fs');
-const path = require("path")
+const path = require("path");
+const {
+    text
+} = require('express');
 async function getText(webfile, outfile) {
     let gethtml = await fetch(webfile);
     let html = await gethtml.text();
@@ -25,6 +28,7 @@ const files = [
 ]
 let date = new Date;
 console.log(date.toString());
+console.log(date.getUTCHours() + ":" + date.getUTCMinutes())
 async function getScript() {
     for (let file of files) {
         await getText("https://" + file, file + ".html")
@@ -35,13 +39,26 @@ async function getScript() {
             if (err) throw err;
             let blookethtml = parse(data);
             let scripttags = blookethtml.getElementsByTagName("script");
+            let srcfiles = [];
             scripttags.forEach(script => {
                 let src = script.getAttribute("src");
-                let srcfile = src.replace("https://ac.blooket.com/", "")
-                getText(src, srcfile)
-                console.log(script.toString());
-                fs.appendFileSync("jsFiles.txt", "\n" + script.toString())
+                let srcfile = src.replace("https://ac.blooket.com/", "");
+                srcfile = srcfile.replace("/assets", "");
+                srcfiles.push(srcfile)
+                getText(src, srcfile + "_" + date.toDateString());
+                getText(src, "last_" + srcfile);
+                if (!fs.existsSync("srcs.txt")) {
+                    fs.writeFileSync("srcs.txt", "");
+                };
+                let srcs = fs.readFileSync("srcs.txt", text).toString()
+                if (srcfile != srcs) {
+                    console.log(script.toString());
+                };
+                fs.appendFileSync("jsFiles.txt", "\n" + script.toString());
             });
+            if (srcfiles.length > 3) {
+                fs.writeFileSync("srcs.txt", text)
+            };
         });
     })
 }

@@ -3,12 +3,27 @@ const {
 } = require('node-html-parser');
 import("node-fetch");
 const fs = require("fs/promises")
-const path = require("path")
+const path = require("path");
+
 
 function formatDate(date) {
-    return (date.getDate().toString() + "-" +
-        +date.getMonth().toString() + "-" +
-        +date.getFullYear().toString())
+    let month = date.getMonth().toString();
+    let monthdate = date.getDate().toString();
+    let year = date.getFullYear().toString();
+    let zero = "0";
+    let monthzero;
+    let monthdatezero;
+    if (month.length < 2) {
+        monthzero = zero.concat(month)
+    } else {
+        monthzero = month
+    }
+    if (monthdate < 2) {
+        monthdatezero = zero.concat(monthdate)
+    } else {
+        monthdatezero = monthdate
+    }
+    return (year + "-" + monthzero + "-" + monthdatezero)
 }
 async function getText(webfile, outfile) {
     let gethtml = await fetch(webfile);
@@ -75,14 +90,12 @@ async function main() {
     for (let file of filesindir) {
         try {
             await fs.rename("last/" + file, "lastold/" + file)
-        } catch (err) {
-
-        }
+        } catch (err) {}
     }
     let filesinolddir = await fs.readdir("lastold/")
     console.log(filesindir.toString())
     console.log(filesinolddir.toString())
-    if (filesinolddir.toString() != filesindir.toString()) {
+    if (filesinolddir.toString() != filesindir.toString() && filesindir.toString() != null && filesinolddir.toString() != null) {
         console.log("blooket has been updated")
     } else {
         console.log("blooket has not been updated")
@@ -106,5 +119,4 @@ function runAtSpecificTimeOfDay(hour, minutes, func) {
         setInterval(func, twentyFourHours);
     }, eta_ms);
 }
-main()
 runAtSpecificTimeOfDay(0, 0, main())

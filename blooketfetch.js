@@ -2,10 +2,8 @@ const {
     parse
 } = require('node-html-parser');
 import("node-fetch");
-const fs = require('fs').promises;
-const path = require("path");
-let date = new Date
-date.get
+const fs = require("fs/promises")
+const path = require("path")
 
 function formatDate(date) {
     return (date.getDate().toString() + "-" +
@@ -75,7 +73,11 @@ async function main() {
     }
 
     for (let file of filesindir) {
-        await fs.rename("last/" + file, "lastold/" + file)
+        try {
+            await fs.rename("last/" + file, "lastold/" + file)
+        } catch (err) {
+
+        }
     }
     let filesinolddir = await fs.readdir("lastold/")
     console.log(filesindir.toString())
@@ -88,4 +90,21 @@ async function main() {
     await getScript()
 }
 
-main().catch(console.error)
+
+//copied from https://gist.github.com/farhad-taran/f487a07c16fd53ee08a12a90cdaea082 because im to lazy to do this by myself
+function runAtSpecificTimeOfDay(hour, minutes, func) {
+    const twentyFourHours = 86400000;
+    const now = new Date();
+    let eta_ms = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 0, 0).getTime() - now;
+    if (eta_ms < 0) {
+        eta_ms += twentyFourHours;
+    }
+    setTimeout(function() {
+        //run once
+        func();
+        // run every 24 hours from now on
+        setInterval(func, twentyFourHours);
+    }, eta_ms);
+}
+main()
+runAtSpecificTimeOfDay(0, 0, main())

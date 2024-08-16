@@ -5,7 +5,6 @@ import("node-fetch");
 const fs = require("fs/promises")
 const path = require("path");
 
-
 function formatDate(date) {
     let month = date.getMonth().toString();
     let monthdate = date.getDate().toString();

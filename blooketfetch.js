@@ -57,8 +57,7 @@ async function getScript() {
                 srcfile = srcfile.replace("/assets", "").replace("/", "");
                 srcfiles.push(srcfile)
                 getText(src, "assets/" + formatteddate + "/" + srcfile);
-                if (filesindir != srcfile)
-                    getText(src, "last/" + srcfile);
+                getText(src, "last/" + srcfile);
                 fs.appendFileSync("jsFiles.txt", "\n" + script.toString());
             });
         });

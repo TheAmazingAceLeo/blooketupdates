@@ -22,11 +22,20 @@ async function getText(webfile, outfile) {
     })
     //console.log(html);
 }
+let filesindir = fs.readdirSync("last/")
+console.log(filesindir)
 const files = [
     "play.blooket.com",
     "dashboard.blooket.com",
     "goldquest.blooket.com"
 ]
+for (let file of filesindir) {
+    if (!fs.existsSync("lastold/")) {
+        fs.mkdirSync("lastold/")
+    }
+    fs.renameSync("last/" + file, "lastold/" + file)
+}
+let filesinolddir = fs.readdirSync("lastold/")
 let date = new Date;
 let formatteddate = formatDate(date);
 console.log(date.toString());
@@ -45,23 +54,21 @@ async function getScript() {
             scripttags.forEach(script => {
                 let src = script.getAttribute("src");
                 let srcfile = src.replace("https://ac.blooket.com/", "");
-                srcfile = srcfile.replace("/assets", "");
+                srcfile = srcfile.replace("/assets", "").replace("/", "");
                 srcfiles.push(srcfile)
                 getText(src, "assets/" + formatteddate + "/" + srcfile);
-                getText(src, "last/" + srcfile);
-                if (!fs.existsSync("srcs.txt")) {
-                    fs.writeFileSync("srcs.txt", "");
-                };
-                let srcs = fs.readFileSync("srcs.txt", "utf8").toString()
-                if (!srcs.includes(srcfile)) {
-                    console.log(script.toString());
-                };
+                if (filesindir != srcfile)
+                    getText(src, "last/" + srcfile);
                 fs.appendFileSync("jsFiles.txt", "\n" + script.toString());
             });
-            if (srcfiles.length > 3) {
-                fs.writeFileSync("srcs.txt", );
-            };
         });
     })
 }
 getScript()
+console.log(filesindir.toString())
+console.log(filesinolddir.toString())
+if (filesinolddir.toString() != filesindir.toString()) {
+    console.log("blooket has been updated")
+} else {
+    console.log("blooket has not been updated")
+}

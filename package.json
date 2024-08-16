@@ -1,6 +1,6 @@
 {
   "name": "blooketupdates",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "blooket update thingy",
   "main": "blooketfetch.js",
   "scripts": {

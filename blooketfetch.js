@@ -22,6 +22,9 @@ async function getText(webfile, outfile) {
     })
     //console.log(html);
 }
+if (!fs.readdirSync("last/")) {
+    fs.mkdirSync("last/")
+}
 let filesindir = fs.readdirSync("last/")
 console.log(filesindir)
 const files = [

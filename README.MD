@@ -5,9 +5,9 @@
 
 ```diff
 - WARNING - THIS BOT IS NOT DONE 
-YET AND I AM NOT RESPONSIBLE FOR 
-ANYTHING THAT HAPPENS TO YOU 
-BECAUSE OF THIS
+- YET AND I AM NOT RESPONSIBLE FOR 
+- ANYTHING THAT HAPPENS TO YOU 
+- BECAUSE OF THIS
 ```
 ## What is this?
 This a bot that will fetch blooket's script files every day and alert when there is a update.

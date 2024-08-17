@@ -6,7 +6,7 @@ const fs = require("fs/promises")
 const path = require("path");
 
 function formatDate(date) {
-    let month = date.getMonth().toString();
+    let month = (date.getMonth() + 1).toString();
     let monthdate = date.getDate().toString();
     let year = date.getFullYear().toString();
     let zero = "0";
@@ -67,6 +67,7 @@ async function getScript() {
             console.log(formatteddate)
             await getText(src, "assets/" + formatteddate + "/" + srcfile);
             await getText(src, "last/" + srcfile);
+            await fs.copyFile("index_last.js", "last/index_last.js")
             await fs.appendFile("jsFiles.txt", "\n" + script.toString());
         };
     }

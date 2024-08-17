@@ -3,7 +3,7 @@
 
 [BCP (Blooket Cheats Plus) discord server](https://discord.gg/8A6J234n7v)
 
-> [!IMPORTANT]
+> [!WARNING]
 > WARNING - THIS BOT IS NOT DONE YET AND I AM NOT RESPONSIBLE FOR ANYTHING THAT HAPPENS TO YOU BECAUSE OF THIS
 
 ## What is this?

@@ -3,7 +3,9 @@
 
 [BCP (Blooket Cheats Plus) discord server](https://discord.gg/8A6J234n7v)
 
-```diff - WARNING - THIS BOT IS NOT DONE YET AND I AM NOT RESPONSIBLE ANYTHING THAT HAPPENS TO YOU BECAUSE OF THIS```
+```diff
+- WARNING - THIS BOT IS NOT DONE YET AND I AM NOT RESPONSIBLE ANYTHING THAT HAPPENS TO YOU BECAUSE OF THIS
+```
 ## What is this?
 This a bot that will fetch blooket's script files every day and alert when there is a update.
 ## Why should I care?

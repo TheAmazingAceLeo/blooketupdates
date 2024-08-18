@@ -72,7 +72,6 @@ async function getScript() {
     }
 }
 async function main() {
-    await getScript()
     try {
         await fs.access("last/");
     } catch (err) {
@@ -90,8 +89,13 @@ async function main() {
     for (let file of filesindir) {
         try {
             await fs.rename("last/" + file, "lastold/" + file)
-        } catch (err) {}
+        } catch (err) {
+            console.error("Error moving files to /lastold/")
+        }
     }
+
+    await getScript()
+
     let filesinolddir = await fs.readdir("lastold/")
     console.log(filesindir.toString())
     console.log(filesinolddir.toString())

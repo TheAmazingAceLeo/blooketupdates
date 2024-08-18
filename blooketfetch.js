@@ -67,12 +67,12 @@ async function getScript() {
             console.log(formatteddate)
             await getText(src, "assets/" + formatteddate + "/" + srcfile);
             await getText(src, "last/" + srcfile);
-            await fs.copyFile("index_last.js", "last/index_last.js")
             await fs.appendFile("jsFiles.txt", "\n" + script.toString());
         };
     }
 }
 async function main() {
+    await getScript()
     try {
         await fs.access("last/");
     } catch (err) {
@@ -100,7 +100,6 @@ async function main() {
     } else {
         console.log("blooket has not been updated")
     }
-    await getScript()
 }
 
 

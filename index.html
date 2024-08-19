@@ -3,14 +3,19 @@
 
 <head>
     <meta charset="utf8">
+    <meta name="author" content="doyle31">
+    <meta name="description" content="Blooket Updates | the only bot tat will tell you when blooket get updated" <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Blooket, Blooket Updater, blooketupdates, Blooket Updates">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blooket Updates Bot</title>
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700|Titan+One|Creepster|Satisfy|Eczar:100,200,300,400,500,600,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700|Titan+One|Creepster|Satisfy|Eczar:700">
     <style>
         html {
-            background-color: #ff86a2;
+            background-color: #ffb6c7;
             /*font-family: Nunito, sans-serif;*/
             font-family: Titan One, sans-serif;
+            touch-action: manipulation;
         }
 
         h1 {
@@ -21,14 +26,21 @@
             font-weight: 200;
         }
     </style>
+    <script>
+        const date = new URLSearchParams(window.location.search).get("date");
+        if (date) {
+            window.location.href = `./assets/${date}`;
+        }
+    </script>
 </head>
 
 <body>
-    <form>
+    <form action="./">
         <h1>Blooket Cheats Updater</h1>
         <h2>Click <a href="/last">here</a> for today's Blooket code</h2>
-        <!--input id="date" type="date" value="date" name="date" min="2024-08-17">
-        <p><button type="submit">submit</button></p-->
+        <label for="date">Blooket's code on a specific day:</label>
+        <p><input id="date" type="date" value="date" name="date" min="2024-08-17"></p>
+        <p><button type="submit" style="font-family: Titan One, sans serif;">Click here to sumbit the date</button></p>
     </form>
 </body>
 

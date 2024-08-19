@@ -67,6 +67,8 @@ async function getScript() {
             console.log(formatteddate)
             await getText(src, "assets/" + formatteddate + "/" + srcfile);
             await getText(src, "last/" + srcfile);
+            await fs.copyFile("./_index.php", "./last/index.php")
+            await fs.copyFile("./_index.php", "./assets/" + formatteddate + "/index.php")
             await fs.appendFile("jsFiles.txt", "\n" + script.toString());
         };
     }
